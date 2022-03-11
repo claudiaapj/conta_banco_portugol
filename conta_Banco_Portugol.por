@@ -30,11 +30,14 @@ programa
 				
 			
 			caso 1:
+			limpa()
 				cadastra_cliente()
 				escreva("\n Aguarde...")
 				U.aguarde(1500)
+				
 			pare
 			caso 2:
+			limpa()
 				inteiro cod
 				escreva("Digite o número da conta: ")
 				leia(cod)
@@ -54,6 +57,15 @@ programa
 			caso 3:
 			
 			pare
+			caso 4:
+			
+			pare
+			caso 5:
+			limpa()
+			lista_clientes()
+			U.aguarde(10000)
+			
+			pare
 				
 			}
 		}enquanto(op !=0)
@@ -67,8 +79,8 @@ programa
 				qnt++
 				escreva("Digite o nome do novo(a) cliente: ")
 				leia(cliente)
-				clientes[i] = cliente
 				cliente = T.caixa_alta(cliente)
+				clientes[i] = cliente
 				escreva("Digite uma senha de 6 dígitos para o(a) cliente ", cliente, ": ")
 				leia(senha)
 				 tam_senha = T.numero_caracteres(senha)
@@ -99,7 +111,8 @@ programa
 					confirma = T.caixa_alta(confirma)
 						 se(confirma == "N"){
 					pare
-				 }	
+					
+				 }	limpa()
 			}
 			}
 		} funcao  inteiro busca_cliente(inteiro cod){
@@ -111,6 +124,15 @@ programa
 			}
 		}
 		retorne pos
+}		funcao lista_clientes(){
+			escreva("  Banco WWW.Solutions! \n")
+			escreva("************************* \n")
+			escreva("****Lista de clientes**** \n")
+			escreva("Contas \t\tClientes \n")
+			para(inteiro i =0; i < contas[i]; i++){
+				escreva(contas[i], "\t\t", clientes[i], "\n")
+				
+			}
 }
 
 }
@@ -119,7 +141,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 2763; 
+ * @POSICAO-CURSOR = 3194; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
