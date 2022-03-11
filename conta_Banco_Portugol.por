@@ -6,7 +6,7 @@ programa
 	inteiro qnt = 0, comprimento = 0, contas[100], conta = 0
 	inteiro pos = -1
 	real saldo = 0.0, saldos[100], valor = 0.0
-	cadeia clientes[100], cliente
+	cadeia clientes[100], cliente, confirma
 	
 	
 	funcao inicio()
@@ -16,7 +16,7 @@ programa
 
 		faca{
 			
-			escreva("Bem vindo ao Banco WWW.Solutions! \n",
+			escreva("Bem vindo ao Banco Solutions! \n",
 				"Temos ", qnt, " clientes cadastrados. \n" )
 			escreva(" 1 - Cadastrar Cliente \n")
 			escreva(" 2 - Ver Saldo \n")
@@ -63,16 +63,23 @@ programa
 			caso 5:
 			limpa()
 			lista_clientes()
-			U.aguarde(10000)
-			
-			pare
-				
+			escreva("\nPara sair do relatório Digite (S - Sim / N - Não): ")
+			leia(confirma)
+			confirma = T.caixa_alta(confirma)
+			enquanto(confirma !="S"){
+				limpa()
+				lista_clientes()
+				escreva("\nDeseja sair do relatório? (S - Sim / N - Não): ")
+				leia(confirma)
+				confirma = T.caixa_alta(confirma)
+			}
+		
 			}
 		}enquanto(op !=0)
 
 	}
 		funcao vazio cadastra_cliente(){
-			cadeia continuar =" ",confirma = " ", senha
+			cadeia continuar =" ", senha
 			inteiro tam_senha = 0
 
 			para (inteiro i = 0; i < 100; i++){
@@ -106,7 +113,7 @@ programa
 					 	contas[i] = conta
 					 }
 					escreva("Número da conta do(a) cliente ", cliente, " é: ", conta, "\n")
-					escreva("Deseja cadastrar novo cliente? " )
+					escreva("Deseja cadastrar novo cliente? (S - Sim / N - Não) " )
 					leia(confirma)
 					confirma = T.caixa_alta(confirma)
 						 se(confirma == "N"){
@@ -125,9 +132,9 @@ programa
 		}
 		retorne pos
 }		funcao lista_clientes(){
-			escreva("  Banco WWW.Solutions! \n")
+			escreva("     Banco Solutions! \n")
 			escreva("************************* \n")
-			escreva("****Lista de clientes**** \n")
+			escreva("****Lista de clientes**** \n\n")
 			escreva("Contas \t\tClientes \n")
 			para(inteiro i =0; i < contas[i]; i++){
 				escreva(contas[i], "\t\t", clientes[i], "\n")
@@ -141,7 +148,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 3194; 
+ * @POSICAO-CURSOR = 3484; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
