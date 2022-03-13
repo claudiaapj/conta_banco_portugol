@@ -5,7 +5,7 @@ programa
 	inclua biblioteca Texto --> T
 	inteiro qnt = 0, comprimento = 0, contas[100], conta = 0
 	inteiro pos = -1
-	real saldo = 0.0, saldos[100], valor = 0.0
+	real saldo = 0.0, saldos[100], soma = 0.0
 	cadeia clientes[100], cliente, confirma
 	
 	
@@ -33,7 +33,7 @@ programa
 			limpa()
 				cadastra_cliente()
 				escreva("\n Aguarde...")
-				U.aguarde(1500)
+				U.aguarde(2000)
 				
 			pare
 			caso 2:
@@ -44,7 +44,7 @@ programa
 				busca_cliente(cod)
 				se(contas[pos] ==cod){
 					para (inteiro i = 0; i < cod; i++){
-						escreva("Conta: ",cod, "\nSaldo: ", saldos[pos], "\n")
+						escreva("Cliente: ", clientes[pos], "\nConta: ",cod, "\nSaldo: ", saldos[pos], "\n")
 						pare
 					}	
 					}senao{
@@ -55,11 +55,66 @@ programa
 				U.aguarde(5000)
 			pare
 			caso 3:
-			
-			pare
+				limpa()
+				real saque = 0.0
+				escreva("Qual o número da conta que deseja realizar o saque? ")
+				leia(conta)
+				escreva("Qual o valor do saque? ")
+				leia(saque)
+				
+					para (inteiro c = 0; c < 100; c++){
+						se(contas[c] == conta){
+							para (inteiro i = 0; i < 100; i++)
+				busca_conta()
+					soma = 0.0
+					soma += saldos[pos]
+				escreva("Seu saldo é: ", saldos[pos], "\n")
+				U.aguarde(6000)
+					se(soma> saque){
+						saldos[pos] = soma - saque
+						escreva("Saque de R$ ", saque, " realizado com sucesso!\n")
+						escreva("Seu saldo é R$ ", saldos[pos], "\n")
+					}senao{
+						escreva("Saldo insuficiente para saque no valor de R$ ", saque, "\n\n")
+					U.aguarde(6000)
+					
+				}pare
+				}senao{
+					escreva("Conta informada inválida!!!")
+					pare
+					}
+				}
+				escreva("\n Aguarde...")
+				U.aguarde(3000)
+				pare
+				
 			caso 4:
-			
-			pare
+				limpa()
+				real dep = 0.0
+				
+				escreva("Qual o número da conta que deseja realizar o depósito? ")
+				leia(conta)
+				para (inteiro i = 0; i < conta; i++)
+				busca_conta()
+				soma = 0.0
+				soma +=saldos[pos]
+				escreva("Qual o valor do depósito? ")
+				leia(dep)
+				escreva("Confirmar depósito na conta do(a) cliente ", clientes[pos], " no valorde R$ ",
+				dep, "? \n", " (S - Sim / N - Não): ")
+				leia(confirma)
+				confirma = T.caixa_alta(confirma)
+				se(confirma == "S"){
+					saldos[pos] = soma + dep
+					escreva("O saldo atual é R$", saldos[pos], "\n")
+					escreva("\n Aguarde...")
+					U.aguarde(5000)
+				pare	
+				}senao{
+					pare
+				}
+				
+		
 			caso 5:
 			limpa()
 			lista_clientes()
@@ -88,7 +143,7 @@ programa
 				leia(cliente)
 				cliente = T.caixa_alta(cliente)
 				clientes[i] = cliente
-				escreva("Digite uma senha de 6 dígitos para o(a) cliente ", cliente, ": ")
+				escreva("Digite uma senha númerica de 6 dígitos para o(a) cliente ", cliente, ": ")
 				leia(senha)
 				 tam_senha = T.numero_caracteres(senha)
 					se(tam_senha == 6){
@@ -131,15 +186,28 @@ programa
 			}
 		}
 		retorne pos
-}		funcao lista_clientes(){
-			escreva("     Banco Solutions! \n")
-			escreva("************************* \n")
-			escreva("****Lista de clientes**** \n\n")
-			escreva("Contas \t\tClientes \n")
-			para(inteiro i =0; i < contas[i]; i++){
-				escreva(contas[i], "\t\t", clientes[i], "\n")
-				
+		}
+		funcao  inteiro busca_conta(){
+		
+			para(inteiro i = 0; i < conta; i++){
+			se(contas[i] == conta){
+			    pos = i
+				pare // para o comando de repetição já que encontrou a conta
 			}
+		}
+		retorne pos
+		}
+
+				
+		funcao lista_clientes(){
+					escreva("     Banco Solutions \n")
+					escreva("************************* \n")
+					escreva("****Lista de clientes**** \n\n")
+					escreva("Contas \t\tClientes \n")
+					para(inteiro i =0; i < contas[i]; i++){
+						escreva(contas[i], "\t\t", clientes[i], "\n")
+						
+					}
 }
 
 }
@@ -148,7 +216,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 3484; 
+ * @POSICAO-CURSOR = 5266; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
