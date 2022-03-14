@@ -16,8 +16,11 @@ programa
 
 		faca{
 			
-			escreva("Bem vindo ao Banco Solutions! \n",
-				"Temos ", qnt, " clientes cadastrados. \n" )
+			limpa()
+			escreva("************************************")
+			escreva("\n    Bem vindo ao Banco Solutions! \n",
+				"    Temos ", qnt, " clientes cadastrados. \n" )
+				escreva("************************************ \n")
 			escreva(" 1 - Cadastrar Cliente \n")
 			escreva(" 2 - Ver Saldo \n")
 			escreva(" 3 - Realizar Saque \n")
@@ -28,93 +31,100 @@ programa
 			leia(op)
 			escolha(op){
 				
-			
+			caso 0:
+			limpa()
+			escreva("Volte sempre!!")
+			U.aguarde(2000)
+			pare
 			caso 1:
 			limpa()
 				cadastra_cliente()
-				escreva("\n Aguarde...")
-				U.aguarde(2000)
+				
 				
 			pare
 			caso 2:
-			limpa()
-				inteiro cod
+				limpa()
+				inteiro cod = 0
 				escreva("Digite o número da conta: ")
 				leia(cod)
-				busca_cliente(cod)
-				se(contas[pos] ==cod){
-					para (inteiro i = 0; i < cod; i++){
-						escreva("Cliente: ", clientes[pos], "\nConta: ",cod, "\nSaldo: ", saldos[pos], "\n")
-						pare
-					}	
-					}senao{
-						escreva("Conta não cadastrada!") 
-						pare
+				para (inteiro i = 0; i < 100; i++){
+					busca_cliente(cod)
+					se(cod == contas[pos]){
+					escreva("Cliente: ", clientes[pos], "\nConta: ",cod, "\nSaldo: ", saldos[pos], "\n")
+					pare
+				}senao{
+					escreva("Conta inválida!")
+					pare
+				}
 				}
 				escreva("\n Aguarde...")
 				U.aguarde(5000)
 			pare
 			caso 3:
 				limpa()
+				
 				real saque = 0.0
 				escreva("Qual o número da conta que deseja realizar o saque? ")
 				leia(conta)
 				escreva("Qual o valor do saque? ")
 				leia(saque)
-				
-					para (inteiro c = 0; c < 100; c++){
-						se(contas[c] == conta){
-							para (inteiro i = 0; i < 100; i++)
-				busca_conta()
-					soma = 0.0
-					soma += saldos[pos]
-				escreva("Seu saldo é: ", saldos[pos], "\n")
-				U.aguarde(6000)
-					se(soma> saque){
-						saldos[pos] = soma - saque
-						escreva("Saque de R$ ", saque, " realizado com sucesso!\n")
-						escreva("Seu saldo é R$ ", saldos[pos], "\n")
-					}senao{
-						escreva("Saldo insuficiente para saque no valor de R$ ", saque, "\n\n")
-					U.aguarde(6000)
-					
-				}pare
-				}senao{
-					escreva("Conta informada inválida!!!")
+				para (inteiro i = 0; i < 100; i++){
+					busca_conta(conta)
+					se(conta == contas[pos]){
+						soma = 0.0
+						soma += saldos[pos]
+						escreva("Seu saldo é: ", saldos[pos], "\n")
+						U.aguarde(2000)
+							se(soma> saque){
+								saldos[pos] = soma - saque
+								escreva("Saque de R$ ", saque, " realizado com sucesso!\n")
+								escreva("Seu saldo é R$ ", saldos[pos], "\n")
+							}senao{
+								escreva("Saldo insuficiente para saque no valor de R$ ", saque, "\n\n")
+								U.aguarde(4000)
+								
+							}pare
+							}senao{
+							escreva("Conta informada inválida!!!")
+							pare
+					}}	
+					escreva("\n Aguarde...")
+					U.aguarde(4000)
 					pare
-					}
-				}
-				escreva("\n Aguarde...")
-				U.aguarde(3000)
-				pare
-				
 			caso 4:
 				limpa()
 				real dep = 0.0
 				
 				escreva("Qual o número da conta que deseja realizar o depósito? ")
 				leia(conta)
-				para (inteiro i = 0; i < conta; i++)
-				busca_conta()
-				soma = 0.0
-				soma +=saldos[pos]
-				escreva("Qual o valor do depósito? ")
-				leia(dep)
-				escreva("Confirmar depósito na conta do(a) cliente ", clientes[pos], " no valorde R$ ",
-				dep, "? \n", " (S - Sim / N - Não): ")
-				leia(confirma)
-				confirma = T.caixa_alta(confirma)
-				se(confirma == "S"){
-					saldos[pos] = soma + dep
-					escreva("O saldo atual é R$", saldos[pos], "\n")
-					escreva("\n Aguarde...")
-					U.aguarde(5000)
-				pare	
-				}senao{
+				para (inteiro i = 0; i < 100; i++){
+					busca_conta(conta)
+					se(conta == contas[pos]){
+					soma = 0.0
+					soma +=saldos[pos]
+					escreva("Qual o valor do depósito? ")
+					leia(dep)
+					escreva("Confirmar depósito na conta do(a) cliente ", clientes[pos], " no valorde R$ ",
+					dep, "? \n", " (S - Sim / N - Não): ")
+					leia(confirma)
+					confirma = T.caixa_alta(confirma)
+					se(confirma == "S"){
+						saldos[pos] = soma + dep
+						escreva("O saldo atual é R$", saldos[pos], "\n")
+						escreva("\n Aguarde...")
+						U.aguarde(3000)
+					pare	
+					}senao{
+						escreva("\nCliente não cadastrado! \n Aguarde...")
+						U.aguarde(3000)
+						pare
+					}}senao{
+						escreva("\nConta informada inválida!!!\n")
+						U.aguarde(3000)
+						pare
+					}
+					}
 					pare
-				}
-				
-		
 			caso 5:
 			limpa()
 			lista_clientes()
@@ -127,9 +137,12 @@ programa
 				escreva("\nDeseja sair do relatório? (S - Sim / N - Não): ")
 				leia(confirma)
 				confirma = T.caixa_alta(confirma)
+			}pare
+			caso contrario:
+				escreva("Opção inválida! \n")
+				U.aguarde(3000)
 			}
-		
-			}
+			
 		}enquanto(op !=0)
 
 	}
@@ -179,15 +192,18 @@ programa
 			}
 		} funcao  inteiro busca_cliente(inteiro cod){
 		
-			para(inteiro i = 0; i < cod; i++){
+			para(inteiro i = 0; i < 100; i++){
 			se(contas[i] == cod){
 			    pos = i
-				pare // para o comando de repetição já que encontrou a conta
+				pare 
 			}
-		}
+	
+			}
 		retorne pos
-		}
-		funcao  inteiro busca_conta(){
+		} 
+
+		
+		funcao  inteiro busca_conta(inteiro cont){
 		
 			para(inteiro i = 0; i < conta; i++){
 			se(contas[i] == conta){
@@ -216,9 +232,9 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 5266; 
+ * @POSICAO-CURSOR = 5688; 
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = ;
+ * @SIMBOLOS-INSPECIONADOS = {contas, 6, 35, 6}-{saldos, 8, 19, 6}-{clientes, 9, 8, 8}-{op, 14, 10, 2}-{saque, 66, 9, 5}-{dep, 96, 9, 3}-{cod, 193, 42, 3};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
